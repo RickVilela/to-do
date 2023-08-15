@@ -150,3 +150,26 @@ textarea::-webkit-scrollbar {
     padding: 25px 10px;
   }
 }
+
+.ready { font-size: 1.5em; }
+.ui-progressbar .ui-progressbar-value { background: lightgreen; }
+.progressbar-container {
+  position: relative;
+  width: auto; 
+  padding-top: 3rem;
+}
+
+.progressbar-bar { 
+height: 25px;
+margin: 10px 0;
+border-radius: 7px;
+
+}
+
+.progressbar-label {
+  position: absolute;
+  top: 2px;
+  left: 45%;
+  z-index: 2;
+  padding-top: 3.5rem;
+}

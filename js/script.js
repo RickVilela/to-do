@@ -45,8 +45,38 @@ inputField.addEventListener("keyup", (e) => {
     todoLists.insertAdjacentHTML("beforeend", liTag); //inserting li tag inside the todolist div
     inputField.value = ""; //removing value from input field
     allTasks();
+    progressbar();
   }
 });
+
+function progressbar(){
+  // get box count
+  var count = 0;
+  var checked = 0;
+  function countBoxes() { 
+    count = $("input[type='checkbox']").length;
+    console.log(count);
+  }
+  
+  countBoxes();
+  $(":checkbox").click(countBoxes);
+  
+  // count checks
+  
+  function countChecked() {
+
+    checked = $("input:checked").length;
+
+      var percentage = parseInt(((checked / count) * 100),10);
+      $(".progressbar-bar").progressbar({
+              value: percentage
+          });
+      $(".progressbar-label").text(percentage + "%");
+  }
+  
+  countChecked();
+  $(":checkbox").click(countChecked);
+}
 
 //checking and unchecking the chekbox while we click on the task
 function handleStatus(e) {
@@ -54,16 +84,24 @@ function handleStatus(e) {
   checkbox.checked = checkbox.checked ? false : true;
   e.classList.toggle("pending");
   allTasks();
+  progressbar()
 }
 
 //deleting task while we click on the delete icon.
 function deleteTask(e) {
   e.parentElement.remove(); //getting parent element and remove it
   allTasks();
+  var checked = checked - 1;
 }
 
 //deleting all the tasks while we click on the clear button.
 clearButton.addEventListener("click", () => {
   todoLists.innerHTML = "";
   allTasks();
+
+  $(".progressbar-bar").progressbar({
+    value: 0
+});
+$(".progressbar-label").text(0 + "%");
+  
 });
